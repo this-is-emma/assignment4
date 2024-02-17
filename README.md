@@ -4,12 +4,6 @@ This is a Tetris game implemented using React and Redux.
 
 ![Tetris Game Demo](src/demo.gif)
 
-## Features
-
-- Feature 1
-- Feature 2
-- Feature 3
-
 ## Installation
 
 To run this project locally, follow these steps:
