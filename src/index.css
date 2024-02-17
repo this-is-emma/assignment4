@@ -46,7 +46,7 @@ code {
   --border-bottom-color: rgba(0, 0, 0, 0.5);
 
   /* Square Colors: background colors for the squares.*/
-  --color-0: #eaeaea;
+  --color-0: #000000;
   --color-1: #ff6600;
   --color-2: #eec900;
   --color-3: #0000ff;
@@ -76,30 +76,58 @@ code {
 
 .color-1 {
   background-color: var(--color-1);
+  box-shadow: 0 0 0px var(--color-1), /* Neon orange glow */
+                0 0 10px var(--color-1), /* Neon orange glow */
+                0 0 0px var(--color-1), /* Neon orange glow */
+                0 0 10px var(--color-1); /* Neon orange glow */
 }
 
 .color-2 {
   background-color: var(--color-2);
+  box-shadow: 0 0 0px var(--color-2),
+                0 0 10px var(--color-2),
+                0 0 0px var(--color-2),
+                0 0 10px var(--color-2);
 }
 
 .color-3 {
   background-color: var(--color-3);
+  box-shadow: 0 0 0px var(--color-3),
+                0 0 10px var(--color-3),
+                0 0 0px var(--color-3),
+                0 0 10px var(--color-3);
 }
 
 .color-4 {
   background-color: var(--color-4);
+  box-shadow: 0 0 0px var(--color-4),
+                0 0 10px var(--color-4),
+                0 0 0px var(--color-4),
+                0 0 10px var(--color-4);
 }
 
 .color-5 {
   background-color: var(--color-5);
+  box-shadow: 0 0 0px var(--color-5),
+                0 0 10px var(--color-5),
+                0 0 0px var(--color-5),
+                0 0 10px var(--color-5);
 }
 
 .color-6 {
   background-color: var(--color-6);
+  box-shadow: 0 0 0px var(--color-6),
+                0 0 10px var(--color-6),
+                0 0 0px var(--color-6),
+                0 0 10px var(--color-6);
 }
 
 .color-7 {
   background-color: var(--color-7);
+  box-shadow: 0 0 0px var(--color-7),
+                0 0 10px var(--color-7),
+                0 0 0px var(--color-7),
+                0 0 10px var(--color-7);
 }
 
 /* Grid Square */
@@ -153,7 +181,6 @@ code {
 
 .App-header {
   grid-area: h;
-  background-color: #282c34;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -176,11 +203,20 @@ code {
   height: var(--size);
   text-align: center;
   display: block;
-  border-width: 5px;
-  border-top-color: var(--button-color-t);
-  border-left-color: var(--button-color-l);
-  border-right-color: var(--button-color-r);
-  border-bottom-color: var(--button-color-b);
+  background-color: #f2f2f2;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.control-button:hover {
+  background-color: #ddd;
+  border-color: #999;
+  color: #333;
 }
 
 /* Message Popup Styles */
@@ -197,4 +233,22 @@ code {
 
 .message-popup.hidden {
   display: none;
+}
+
+body {
+  background-color: #282c34;
+  background-image: url("./bg.jpg");
+  background-size:cover;
+  background-repeat: no-repeat;
+  padding-top: 5rem;
+}
+
+.score-div, .level-div {
+  color: white;
+  text-shadow: 0 0 10px #fff,
+                 0 0 20px #fff,
+                 0 0 30px #fff,
+                 0 0 40px #0ff,
+                 0 0 30px #0ff,
+                 0 0 80px #0ff;
 }
