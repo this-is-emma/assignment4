@@ -1,28 +1,76 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { moveDown, moveLeft, moveRight, rotate } from '../features/gameSlice';
 
 export default function Controls(props) {
-  return (
-  <div className="controls">
-    {/* left */}
-    <button className="control-button" onClick={(e) => {
-      // ...
-    }}>Left</button>
+	const dispatch = useDispatch();
+    const { isRunning, speed, gameOver } = useSelector(state => state);
+    const requestRef = useRef();
+    const lastUpdateTimeRef = useRef(0);
+    const progressTimeRef = useRef(0);
 
-    {/* right */}
-    <button className="control-button" onClick={(e) => {
-      // ...
-    }}>Right</button>
+    // Handle game updates to move blocks down the screen
+    const update = (time) => {
+    requestRef.current = requestAnimationFrame(update)
+    if (!isRunning) {
+      return
+    }
+    if (!lastUpdateTimeRef.current) {
+      lastUpdateTimeRef.current = time
+    }
+      const deltaTime = time - lastUpdateTimeRef.current
+      progressTimeRef.current += deltaTime
+    if (progressTimeRef.current > speed) {
+        dispatch(moveDown())
+        progressTimeRef.current = 0
+      }
+      lastUpdateTimeRef.current = time
+    }
 
-    {/* rotate */}
-    <button className="control-button" onClick={(e) => {
-      // ...
-    }}>Rotate</button>
+    // Initialize request animation frame and remove it when isRunning changes
+    useEffect(() => {
+        requestRef.current = requestAnimationFrame(update)
+        return () => cancelAnimationFrame(requestRef.current)
+    }, [isRunning])
 
-    {/* down */}
-    <button className="control-button" onClick={(e) => {
-      // ...
-    }}>Down</button>
+	return (
+		<div className="controls">
+      {/* left */}
+      <button
+        disabled={!isRunning || gameOver}
+        className="control-button"
+        onClick={(e) => {
+          dispatch(moveLeft())
+        }
+      }>Left</button>
 
-  </div>
-  )
+      {/* right */}
+      <button
+        disabled={!isRunning || gameOver}
+        className="control-button"
+        onClick={(e) => {
+          dispatch(moveRight())
+        }
+      }>Right</button>
+
+      {/* rotate */}
+      <button
+        disabled={!isRunning || gameOver}
+        className="control-button"
+        onClick={(e) => {
+          dispatch(rotate())
+        }
+      }>Rotate</button>
+
+      {/* down */}
+      <button
+        disabled={!isRunning || gameOver}
+        className="control-button"
+        onClick={(e) => {
+          dispatch(moveDown())
+        }
+      }>Down</button>
+
+		</div>
+	)
 }
